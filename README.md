@@ -46,3 +46,9 @@ Never commit a real API key, access token, or private deployment secret.
 Record the source and timestamp of retrieved baseball data, and validate agent outputs against the source dataset before drawing conclusions.
 
 For reproducibility, record source versions, environment and dependency versions, configuration, and actual test outputs. Clearly label sample data and illustrative results; never commit secrets or private data.
+
+### Technical Deep Dive
+
+The documented deployment uses a static frontend with a Vercel serverless endpoint at `api/chat.js`. The browser should call that endpoint rather than calling Gemini directly, so `GEMINI_API_KEY` remains server-side. Validate incoming message shape and length, constrain provider response handling, and return consistent error codes for missing keys, quota limits, and upstream failures.
+
+Suggested engineering checks: test the function locally with `vercel dev`, confirm the key is absent from built browser assets and network responses, and add rate limiting or abuse controls before exposing the endpoint publicly.
