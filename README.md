@@ -40,3 +40,9 @@ Create a local `.env` file with `GEMINI_API_KEY=your_key_here` for local testing
 - Review provider quotas and usage limits before making the application publicly accessible.
 
 Never commit a real API key, access token, or private deployment secret.
+
+## Project Development Notes
+
+Record the source and timestamp of retrieved baseball data, and validate agent outputs against the source dataset before drawing conclusions.
+
+For reproducibility, record source versions, environment and dependency versions, configuration, and actual test outputs. Clearly label sample data and illustrative results; never commit secrets or private data.
