@@ -31,3 +31,12 @@ Create a local `.env` file with `GEMINI_API_KEY=your_key_here` for local testing
 - The Gemini key is used only by the serverless API function, not shipped to the browser.
 - The selected model is `gemini-2.5-flash` in `api/chat.js`. If that model is unavailable to your project, change `MODEL` to a model currently available in your Google AI Studio project.
 - API usage may be subject to Google quotas and billing settings.
+
+## Configuration and Security Checklist
+
+- Store the Gemini API key only in a local environment file or the deployment platform's secret manager.
+- Confirm that the API request is handled by the server-side function and that the key is never returned to the browser.
+- Test missing-key, invalid-key, rate-limit, and provider-error cases.
+- Review provider quotas and usage limits before making the application publicly accessible.
+
+Never commit a real API key, access token, or private deployment secret.
