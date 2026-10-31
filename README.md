@@ -60,3 +60,11 @@ Suggested engineering checks: test the function locally with `vercel dev`, confi
 - Test missing or invalid keys, provider quota errors, timeouts, and malformed responses.
 - Document the model identifier and update it only to a model enabled for the configured provider project.
 - Never commit .env files, access tokens, or deployment secrets.
+
+## AI Application Engineering Notes
+
+- Document the input/output contract for each AI component and validate inputs before inference.
+- Keep model loading separate from request handling to avoid repeated initialization where the runtime permits.
+- Add clear fallbacks for unavailable models, invalid responses, and external API errors.
+- Track latency, resource usage, and failure rates during testing.
+- Store secrets in environment variables and document configuration without exposing credentials.
