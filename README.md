@@ -52,3 +52,11 @@ For reproducibility, record source versions, environment and dependency versions
 The documented deployment uses a static frontend with a Vercel serverless endpoint at `api/chat.js`. The browser should call that endpoint rather than calling Gemini directly, so `GEMINI_API_KEY` remains server-side. Validate incoming message shape and length, constrain provider response handling, and return consistent error codes for missing keys, quota limits, and upstream failures.
 
 Suggested engineering checks: test the function locally with `vercel dev`, confirm the key is absent from built browser assets and network responses, and add rate limiting or abuse controls before exposing the endpoint publicly.
+
+## Deployment Security and Operations
+
+- Keep GEMINI_API_KEY exclusively in server-side environment variables and never ship it to the browser.
+- Validate message payloads, limit request sizes, and apply rate limiting to public endpoints to reduce quota abuse.
+- Test missing or invalid keys, provider quota errors, timeouts, and malformed responses.
+- Document the model identifier and update it only to a model enabled for the configured provider project.
+- Never commit .env files, access tokens, or deployment secrets.
