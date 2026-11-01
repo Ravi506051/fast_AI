@@ -68,3 +68,10 @@ Suggested engineering checks: test the function locally with `vercel dev`, confi
 - Add clear fallbacks for unavailable models, invalid responses, and external API errors.
 - Track latency, resource usage, and failure rates during testing.
 - Store secrets in environment variables and document configuration without exposing credentials.
+
+## Deployment and Security Verification
+
+- Confirm that the Gemini API request is made by the server-side function and that the key is never exposed in browser bundles or responses.
+- Test missing, invalid, and rate-limited API credentials and show a safe user-facing error for each case.
+- Configure environment variables separately for local, preview, and production deployments.
+- Add request-size limits and basic rate limiting before making the endpoint publicly accessible.
