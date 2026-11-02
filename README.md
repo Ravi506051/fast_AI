@@ -1,77 +1,32 @@
 # Nova AI — Gemini Chatbot
 
-A responsive, ChatGPT-inspired chatbot UI powered by Google's Gemini API and deployable to Vercel.
+A responsive conversational interface that connects to Google's Gemini API through a server-side function. The project documentation describes a Vercel deployment workflow.
 
-## Deploy with GitHub + Vercel
+## Application flow
+1. The user submits a message through the web interface.
+2. The frontend sends the request to the serverless API endpoint.
+3. The server-side function calls the configured Gemini model.
+4. The response is returned to the interface for display.
 
-1. Extract this ZIP.
-2. Create a **new public or private GitHub repository**: https://github.com/new
-3. Upload the **contents of this extracted folder** (not the ZIP itself) and commit the files.
-4. Open https://vercel.com/new and import that GitHub repository.
-5. In Vercel, open **Project → Settings → Environment Variables**.
-6. Add:
-   - **Name:** `GEMINI_API_KEY`
-   - **Value:** your newly generated Gemini API key
-   - **Environment:** Production, Preview, and Development (or at least the ones you need)
-7. Save, then open **Deployments** and redeploy if the first deployment happened before you added the variable.
+## Technology
+JavaScript · Gemini API · Vercel Serverless Functions
 
-No build command is required for this static frontend + Vercel serverless function project. The API endpoint is `api/chat.js`.
-
-## Local preview (optional)
-
-Requires Node.js and Vercel CLI:
+## Local preview
+Install the Vercel CLI and use the project configuration:
 ```bash
 npm install -g vercel
 vercel dev
 ```
-Create a local `.env` file with `GEMINI_API_KEY=your_key_here` for local testing. Never commit `.env`.
+Set `GEMINI_API_KEY` in a local environment file for development. Never commit real API keys.
 
-## Notes
+## Deployment
+Import the repository into Vercel, configure `GEMINI_API_KEY` in project environment variables and deploy. Review `api/chat.js` for the model configured by the current implementation.
 
-- The Gemini key is used only by the serverless API function, not shipped to the browser.
-- The selected model is `gemini-2.5-flash` in `api/chat.js`. If that model is unavailable to your project, change `MODEL` to a model currently available in your Google AI Studio project.
-- API usage may be subject to Google quotas and billing settings.
+## Security and reliability
+Keep credentials exclusively on the server side. Validate request size, handle provider errors and rate limits, and protect public endpoints against quota abuse.
 
-## Configuration and Security Checklist
+## Future improvements
+Add streaming responses, conversation history, configurable model settings and tests for invalid input and provider failures.
 
-- Store the Gemini API key only in a local environment file or the deployment platform's secret manager.
-- Confirm that the API request is handled by the server-side function and that the key is never returned to the browser.
-- Test missing-key, invalid-key, rate-limit, and provider-error cases.
-- Review provider quotas and usage limits before making the application publicly accessible.
-
-Never commit a real API key, access token, or private deployment secret.
-
-## Project Development Notes
-
-Record the source and timestamp of retrieved baseball data, and validate agent outputs against the source dataset before drawing conclusions.
-
-For reproducibility, record source versions, environment and dependency versions, configuration, and actual test outputs. Clearly label sample data and illustrative results; never commit secrets or private data.
-
-### Technical Deep Dive
-
-The documented deployment uses a static frontend with a Vercel serverless endpoint at `api/chat.js`. The browser should call that endpoint rather than calling Gemini directly, so `GEMINI_API_KEY` remains server-side. Validate incoming message shape and length, constrain provider response handling, and return consistent error codes for missing keys, quota limits, and upstream failures.
-
-Suggested engineering checks: test the function locally with `vercel dev`, confirm the key is absent from built browser assets and network responses, and add rate limiting or abuse controls before exposing the endpoint publicly.
-
-## Deployment Security and Operations
-
-- Keep GEMINI_API_KEY exclusively in server-side environment variables and never ship it to the browser.
-- Validate message payloads, limit request sizes, and apply rate limiting to public endpoints to reduce quota abuse.
-- Test missing or invalid keys, provider quota errors, timeouts, and malformed responses.
-- Document the model identifier and update it only to a model enabled for the configured provider project.
-- Never commit .env files, access tokens, or deployment secrets.
-
-## AI Application Engineering Notes
-
-- Document the input/output contract for each AI component and validate inputs before inference.
-- Keep model loading separate from request handling to avoid repeated initialization where the runtime permits.
-- Add clear fallbacks for unavailable models, invalid responses, and external API errors.
-- Track latency, resource usage, and failure rates during testing.
-- Store secrets in environment variables and document configuration without exposing credentials.
-
-## Deployment and Security Verification
-
-- Confirm that the Gemini API request is made by the server-side function and that the key is never exposed in browser bundles or responses.
-- Test missing, invalid, and rate-limited API credentials and show a safe user-facing error for each case.
-- Configure environment variables separately for local, preview, and production deployments.
-- Add request-size limits and basic rate limiting before making the endpoint publicly accessible.
+## Maintainer
+**Ravi Kumar Rao** · [GitHub](https://github.com/Ravi506051)
