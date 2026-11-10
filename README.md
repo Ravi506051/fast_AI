@@ -42,3 +42,10 @@ Add streaming responses, conversation history, configurable model settings and t
 ## Portfolio Context
 
 This project is part of my hands-on learning portfolio. The repository documents the workflow and implementation; results should be reproduced from the included code and data before being used in reports or professional claims.
+
+## API Integration and Reliability
+
+- Keep the Gemini API key on the server side; never expose secrets in browser code or public commits.
+- Validate incoming requests and handle quota limits, network errors, and empty messages.
+- Make model configuration explicit so the selected provider and model can be changed safely.
+- Add tests for request validation and error responses, and document the required deployment environment variables.
