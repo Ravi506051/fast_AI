@@ -27,6 +27,11 @@ Import the repository as a Vercel project, add GEMINI_API_KEY to its environment
 
 Validate requests and handle provider errors and quota limits in the API route. Apply suitable request limits before exposing the endpoint publicly.
 
+## Request and limits
+
+The frontend sends up to the latest 20 chat messages to the Gemini 2.5 Flash endpoint. The API rejects oversized message content (12,000 characters per message). Keep the API key in the server environment, never in browser JavaScript or Git.
+
+
 ## Maintainer
 
 Ravi Kumar Rao · [GitHub](https://github.com/Ravi506051)
