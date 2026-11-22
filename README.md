@@ -1,51 +1,32 @@
 # Nova AI — Gemini Chatbot
 
-A responsive conversational interface that connects to Google's Gemini API through a server-side function. The project documentation describes a Vercel deployment workflow.
+A browser-based chat interface backed by a server-side Gemini API endpoint, intended for Vercel deployment.
 
-## Application flow
-1. The user submits a message through the web interface.
-2. The frontend sends the request to the serverless API endpoint.
-3. The server-side function calls the configured Gemini model.
-4. The response is returned to the interface for display.
+## Request flow
 
-## Technology
-JavaScript · Gemini API · Vercel Serverless Functions
+~~~text
+Browser UI (app.js) → /api/chat → Gemini API → response in chat
+~~~
 
-## Local preview
-Install the Vercel CLI and use the project configuration:
-```bash
+The frontend is in index.html, style.css, and app.js; the serverless endpoint is api/chat.js. Keep the API key in the server environment, never in browser JavaScript or Git.
+
+## Local development
+
+Install the Vercel CLI and set GEMINI_API_KEY in your local environment:
+
+~~~bash
 npm install -g vercel
 vercel dev
-```
-Set `GEMINI_API_KEY` in a local environment file for development. Never commit real API keys.
+~~~
 
-## Deployment
-Import the repository into Vercel, configure `GEMINI_API_KEY` in project environment variables and deploy. Review `api/chat.js` for the model configured by the current implementation.
+## Deploy on Vercel
 
-## Security and reliability
-Keep credentials exclusively on the server side. Validate request size, handle provider errors and rate limits, and protect public endpoints against quota abuse.
+Import the repository as a Vercel project, add GEMINI_API_KEY to its environment variables, and deploy. Check api/chat.js for the model and request format.
 
-## Future improvements
-Add streaming responses, conversation history, configurable model settings and tests for invalid input and provider failures.
+## Operations
+
+Validate requests and handle provider errors and quota limits in the API route. Apply suitable request limits before exposing the endpoint publicly.
 
 ## Maintainer
-**Ravi Kumar Rao** · [GitHub](https://github.com/Ravi506051)
 
-## Skills Demonstrated
-
-- JavaScript application development
-- Gemini API integration
-- serverless functions
-- Vercel deployment
-- server-side credential handling.
-
-## Portfolio Context
-
-This project is part of my hands-on learning portfolio. The repository documents the workflow and implementation; results should be reproduced from the included code and data before being used in reports or professional claims.
-
-## API Integration and Reliability
-
-- Keep the Gemini API key on the server side; never expose secrets in browser code or public commits.
-- Validate incoming requests and handle quota limits, network errors, and empty messages.
-- Make model configuration explicit so the selected provider and model can be changed safely.
-- Add tests for request validation and error responses, and document the required deployment environment variables.
+Ravi Kumar Rao · [GitHub](https://github.com/Ravi506051)
